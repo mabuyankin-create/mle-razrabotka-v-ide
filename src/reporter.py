@@ -14,3 +14,10 @@ class DataFrameReporter:
         print('Количество дубликатов:', duplicates)
 
         print('Доля дубликатов:', format(duplicates / df.shape[0], self.percent_format))
+        print(df.describe(include='all' if self.include_all else None))
+
+        missing_count = df.isna().sum().sum()
+        print('Количество пропусков:', missing_count)
+
+        missing_share = missing_count / (df.shape[0] * df.shape[1])
+        print('Доля пропусков:', format(missing_share, self.float_format))
